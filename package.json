@@ -1,0 +1,32 @@
+{
+  "name": "express.js-workout",
+  "version": "1.0.0",
+  "description": "Following NodeJS - The Complete Guide (incl. Deno, REST APIs, GraphQL) Section 5",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-without-nodemon": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoldenMaximo/Express.js-Workout.git"
+  },
+  "keywords": [
+    "express",
+    "express.js",
+    "nodejs"
+  ],
+  "author": "Gustavo Máximo Filho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GoldenMaximo/Express.js-Workout/issues"
+  },
+  "homepage": "https://github.com/GoldenMaximo/Express.js-Workout#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
