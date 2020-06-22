@@ -3,7 +3,7 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title My Shop
+        title #{DocTitle}
         link(rel="stylesheet", href="/css/main.css")
         link(rel="stylesheet", href="/css/product.css")
     body
@@ -11,6 +11,23 @@ html(lang="en")
             nav.main-header__nav
                 ul.main-header__item-list
                     li.main-header__item
-                        a.active(hreft="/") Shop
+                        a.active(href="/") Shop
                     li.main-header__item
-                        a(hreft="/admin/add-product") Add-Product
+                        a(href="/admin/add-product") Add-Product
+
+        main
+            if prods.length > 0
+                .grid
+                    each product in prods
+                        article.card.product-item
+                            header.card__header
+                                h1.product__title #{product.title}
+                            .card__image
+                                img(src="https://m.media-amazon.com/images/I/512erN7w6fL.jpg", alt="A Book")
+                            .card__content
+                                h2.product__price $19.99
+                                p.product__description A very interesting book about so many even more interesting things!
+                            .card__actions
+                                button.btn Add to Cart
+            else
+                h1 No Products
