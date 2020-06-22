@@ -2,7 +2,7 @@ dependencies:
   body-parser: 1.19.0
   ejs: 3.1.3
   express: 4.17.1
-  express-handlebars: 4.0.4
+  express-handlebars: 3.0.2
   pug: 3.0.0
 devDependencies:
   nodemon: 2.0.4
@@ -465,7 +465,7 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
-  /express-handlebars/4.0.4:
+  /express-handlebars/3.0.2:
     dependencies:
       glob: 7.1.6
       graceful-fs: 4.2.4
@@ -476,7 +476,7 @@ packages:
     engines:
       node: '>=0.10'
     resolution:
-      integrity: sha512-WxbQorVc7V9ORzp9YpG3fLAzrfIrKcScSezuFxTZRFJSx/P2f7QJ9ZyADV8cyPuomyzUxAJnw6t8dnriLfBNvg==
+      integrity: sha512-rPaSqR8xPnSqfvWvI8Mhtn7nifaMmySq6yhWkjH07Ks/nuDaRngJyf7eDN2I7PBkNVdZHf0Bz+1rY1yrZFdx8g==
   /express/4.17.1:
     dependencies:
       accepts: 1.3.7
@@ -1625,6 +1625,6 @@ specifiers:
   body-parser: ^1.19.0
   ejs: ^3.1.3
   express: ^4.17.1
-  express-handlebars: ^4.0.4
+  express-handlebars: '3.0'
   nodemon: ^2.0.4
   pug: ^3.0.0
