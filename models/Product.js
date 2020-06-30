@@ -29,15 +29,24 @@ module.exports = class Product {
                 updatedProducts[existingProductIndex] = this;
                 fs.writeFile(p, JSON.stringify(updatedProducts), err => {
                     console.log(err);
-                })
+                });
             } else {
                 this.id = Math.random().toString();
                 products.push(this);
                 fs.writeFile(p, JSON.stringify(products), err => {
                     console.log(err);
-                })
+                });
             }
         });
+    }
+
+    static delete(id) {
+        getProductsFromFile(products => {
+            const newProductsArray = products.filter(prod => prod.id !== id);
+            fs.writeFile(p, JSON.stringify(newProductsArray), err => {
+                console.log(err);
+            });
+        })
     }
 
     static fetchAll(cb) {
