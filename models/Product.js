@@ -5,9 +5,9 @@ const sequelize = require('../util/database');
 const Product = sequelize.define('product', {
     id: {
         type: Sequelize.INTEGER,
-        autoIncrement,
+        autoIncrement: true,
         allowNull: false,
-        primaryKey
+        primaryKey: true,
     },
     title: Sequelize.STRING,
     price: {
