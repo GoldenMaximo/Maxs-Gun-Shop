@@ -17,7 +17,7 @@ exports.postAddProduct = (req, res) => {
         imageUrl,
         description
     }).then(result => {
-        console.log(result);
+        console.log('Created Product');
     }).catch(err => {
         console.log(err);
     });
