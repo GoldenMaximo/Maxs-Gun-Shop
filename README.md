@@ -1,14 +1,14 @@
 # NodeJS - The Complete Guide (incl. Deno, REST APIs, GraphQL)
-> NodeJS E-Commerce Learning Project
+> Node.js Learning Project
 
 Intended to upgrade my back-end skills.
 
 ## Usage example
 
-This is an online shop. Functionalities are currently under construction.
+This is an e-commerce / online shop. Functionalities are currently under construction.
 An usage guide is soon to follow.
 
-## Built With (Not all are in-use. Technologies were alternated mid-project for learning purposes)
+## Built With
 
 * [Node.js](https://nodejs.org/en/) - JavaScript runtime
 * [Express.js](https://expressjs.com/) - Web framework for Node.js
@@ -22,6 +22,8 @@ An usage guide is soon to follow.
 * [dotenv](https://www.npmjs.com/package/dotenv) - Environment variable waiter
 * [pnpm](https://www.npmjs.com/package/pnpm) - The best package manager
 
+(Not all are in-use. Technologies were alternated mid-project for learning purposes)
+
 ## Inspirations and resources
 
 * [NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)](https://www.udemy.com/course/nodejs-the-complete-guide/) - The course over @ Udemy
@@ -29,7 +31,7 @@ An usage guide is soon to follow.
 ## DEMO
 
 <!-- ![](public/demo.gif) -->
-soon
+Soon
 
 ## Installation
 
@@ -49,7 +51,7 @@ or npm:
 npm install
 ```
 
-or my FAVORITE and the one used to build this project - pnpm:
+or the best:
 
 ```
 pnpm install
@@ -79,10 +81,10 @@ pnpm start
 3. Create an .env file with the following properties according to your local database configuration:
 
 ```
-DB_HOST=?
-DB_USER=?
-DB_NAME=?
-DB_PASS=?
+DB_HOST=*
+DB_USER=*
+DB_NAME=*
+DB_PASS=*
 ```
 
 *This will start the server at `localhost:3000`*
