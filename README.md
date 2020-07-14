@@ -57,6 +57,15 @@ or the best:
 pnpm install
 ```
 
+3. Create an .env file with the following properties according to your local database configuration:
+
+```
+DB_HOST=*
+DB_USER=*
+DB_NAME=*
+DB_PASS=*
+```
+
 
 ## Running
 
@@ -76,15 +85,6 @@ or pnpm:
 
 ```
 pnpm start
-```
-
-3. Create an .env file with the following properties according to your local database configuration:
-
-```
-DB_HOST=*
-DB_USER=*
-DB_NAME=*
-DB_PASS=*
 ```
 
 *This will start the server at `localhost:3000`*
