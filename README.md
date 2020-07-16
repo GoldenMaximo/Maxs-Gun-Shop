@@ -1,9 +1,7 @@
 # NodeJS - The Complete Guide (incl. Deno, REST APIs, GraphQL)
-> Node.js Learning Project
+> Node.js Learning Project intended to upgrade my back-end skills.
 
-Intended to upgrade my back-end skills.
-
-## Usage example
+## What is it?
 
 This is an e-commerce / online shop. Functionalities are currently under construction.
 An usage guide is soon to follow.
