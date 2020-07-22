@@ -2,14 +2,14 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const mongoConnect = require('./util/database');
+const { mongoConnect } = require('./util/database');
 
 const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-// const adminRoutes = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 // const shopRoutes = require('./routes/shop');
 // const notFoundRoute = require('./routes/not-found');
 
@@ -21,14 +21,14 @@ app.use((req, res, next) => {
     //     req.user = user;
     //     next();
     // }).catch(err => console.log(err));
+    next();
 });
 
-// app.use('/admin', adminRoutes);
+app.use('/admin', adminRoutes);
 // app.use(shopRoutes);
 // app.use(notFoundRoute);
 
-mongoConnect((client) => {
-    console.log(client);
+mongoConnect(() => {
     app.listen(3000);
 })
 
