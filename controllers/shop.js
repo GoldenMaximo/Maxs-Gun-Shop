@@ -21,10 +21,11 @@ exports.getProduct = (req, res, next) => {
     // }).then(result => {
     //     console.log('here boy: ', result);
     // }).catch(err => console.log(err));
-    Product.findByPk(prodId).then(({dataValues}) => {
+    Product.findById(prodId).then((product) => {
+        console.log('here boyo: ', product);
         res.render('shop/product-detail', {
-            product: dataValues,
-            pageTitle: dataValues.title,
+            product: product,
+            pageTitle: product.title,
             path: '/products',
         })
     }).catch(err => console.log(err));
