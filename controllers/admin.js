@@ -41,8 +41,6 @@ exports.getEditProduct = (req, res, next) => {
 exports.postEditProduct = (req, res, next) => {
     const { productId, title, imageUrl, price, description } = req.body;
 
-    console.log('ayo what it do: ', productId);
-
     new Product(title, price, description, imageUrl, productId).save().then(() => {
         res.redirect('/admin/products');
     }).catch(err => {
@@ -56,10 +54,7 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res) => {
     const { productId } = req.params;
-    Product.findByPk(productId).then(product => {
-        return product.destroy();
-    }).then(() => {
-        console.log('PRODUCT DESTROYED');
+    Product.deleteById(productId).then(() => {
         res.redirect('/admin/products');
     }).catch(err => {
         console.log(err);
