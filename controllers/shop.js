@@ -44,14 +44,13 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-    req.user.getCart().then(cart => {
-        cart.getProducts().then(products => {
-            res.render('shop/cart', {
-                pageTitle: 'Your Cart',
-                path: '/cart',
-                products: products
-            });
-        }).catch(err => console.log(err));
+    req.user.getCart().then(products => {
+        console.log('here boy: ', products);
+        res.render('shop/cart', {
+            pageTitle: 'Your Cart',
+            path: '/cart',
+            products: products
+        });
     }).catch(err => console.log(err));
 };
 
