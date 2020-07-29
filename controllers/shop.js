@@ -22,7 +22,6 @@ exports.getProduct = (req, res, next) => {
     //     console.log('here boy: ', result);
     // }).catch(err => console.log(err));
     Product.findById(prodId).then((product) => {
-        console.log('here boyo: ', product);
         res.render('shop/product-detail', {
             product: product,
             pageTitle: product.title,
@@ -45,7 +44,6 @@ exports.getIndex = (req, res, next) => {
 
 exports.getCart = (req, res, next) => {
     req.user.getCart().then(products => {
-        console.log('here boy: ', products);
         res.render('shop/cart', {
             pageTitle: 'Your Cart',
             path: '/cart',
@@ -96,16 +94,8 @@ exports.postCart = (req, res, next) => {
 
 exports.postCartDeleteProduct = (req, res) => {
     const prodId = req.body.productId;
-    req.user.getCart().then(cart => {
-        return cart.getProducts({
-            where: {
-                id: prodId
-            }
-        })
-    }).then(products => {
-        const product = products[0];
-        return product.cartItem.destroy();
-    }).then(() => {
+    req.user.deleteItemFromCart(prodId).then(result => {
+        console.log('result')
         res.redirect('/cart');
     }).catch(err => console.log(err));
 }

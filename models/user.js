@@ -37,10 +37,22 @@ class User {
         );
     }
 
+    deleteItemFromCart(productId) {
+        const updatedCartItems = this.cart.items.filter(product => product.productId.toString() !== productId.toString());
+        console.log('heyoo: ', updatedCartItems);
+        const db = getDb();
+        const updatedCart = {
+            items: updatedCartItems
+        };
+        return db.collection('users').updateOne(
+            { _id: new mongodb.ObjectId(this._id) },
+            { $set: { cart: { items: updatedCartItems } } }
+        );
+    }
+
     getCart() {
         const db = getDb();
         const productIds = this.cart.items.map(item => item.productId);
-        console.log(this.cart);
         return db.collection('products').find({_id: {$in: productIds}}).toArray().then(products => {
             return products.map(p => {
                 return {
