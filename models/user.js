@@ -41,9 +41,6 @@ class User {
         const updatedCartItems = this.cart.items.filter(product => product.productId.toString() !== productId.toString());
         console.log('heyoo: ', updatedCartItems);
         const db = getDb();
-        const updatedCart = {
-            items: updatedCartItems
-        };
         return db.collection('users').updateOne(
             { _id: new mongodb.ObjectId(this._id) },
             { $set: { cart: { items: updatedCartItems } } }
@@ -53,7 +50,7 @@ class User {
     getCart() {
         const db = getDb();
         const productIds = this.cart.items.map(item => item.productId);
-        return db.collection('products').find({_id: {$in: productIds}}).toArray().then(products => {
+        return db.collection('products').find({ _id: { $in: productIds } }).toArray().then(products => {
             return products.map(p => {
                 return {
                     ...p,
@@ -61,6 +58,34 @@ class User {
                 }
             })
         });
+    }
+
+    addOrder() {
+        const db = getDb();
+        return this.getCart().then(products => {
+            const order = {
+                items: products,
+                user: {
+                    _id: new mongodb.ObjectId(this._id),
+                    name: this.name,
+                    email: this.email
+                }
+            };
+            return db.collection('orders').insertOne(order);
+        }).then(result => {
+            this.cart = { items: [] };
+            return db.collection('users').updateOne(
+                { _id: new mongodb.ObjectId(this._id) },
+                { $set: { cart: this.cart } }
+            );
+        });
+    }
+
+    getOrders() {
+        const db = getDb();
+        return db.collection('orders').find().toArray().then(orders => {
+            return orders
+        }).catch(err => console.log(err));
     }
 
     static findById(userId) {
