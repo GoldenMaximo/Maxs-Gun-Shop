@@ -1,8 +1,9 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-const { mongoConnect } = require('./util/database');
 const User = require('./models/user');
 
 const app = express();
@@ -12,7 +13,7 @@ app.set('views', 'views');
 
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
-// const notFoundRoute = require('./routes/not-found');
+const notFoundRoute = require('./routes/not-found');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -26,9 +27,8 @@ app.use((req, res, next) => {
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
-// app.use(notFoundRoute);
+app.use(notFoundRoute);
 
-mongoConnect(() => {
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ygqkk.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`).then(connection => {
     app.listen(3000);
-})
-
+}).catch(err => console.log(err));
