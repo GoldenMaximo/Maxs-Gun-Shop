@@ -66,11 +66,14 @@ exports.postDeleteProduct = (req, res) => {
 }
 
 exports.getProducts = (req, res, next) => {
-    Product.find().then(products => {
-        res.render('admin/products', {
-            path: '/admin/products',
-            pageTitle: 'Admin Products',
-            prods: products
-        })
-    }).catch(err => console.log(err));
+    Product.find()
+        // .populate('userId')
+        .then(products => {
+            console.log(products);
+            res.render('admin/products', {
+                path: '/admin/products',
+                pageTitle: 'Admin Products',
+                prods: products
+            })
+        }).catch(err => console.log(err));
 };

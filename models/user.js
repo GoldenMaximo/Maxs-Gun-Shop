@@ -17,7 +17,30 @@ const userSchema = new Schema({
             quantity: { type: Number, required: true }
         }]
     }
-})
+});
+
+userSchema.methods.addToCart = function (product) {
+    const cartProductIndex = this.cart.items.findIndex(cartProduct => cartProduct.productId.toString() === product._id.toString());
+
+    let newQuantity = 1;
+    const updatedCartItems = [...this.cart.items];
+
+    if (cartProductIndex >= 0) {
+        newQuantity = this.cart.items[cartProductIndex].quantity + 1;
+        updatedCartItems[cartProductIndex].quantity = newQuantity;
+    } else {
+        updatedCartItems.push({ productId: product._id, quantity: newQuantity });
+    }
+
+    const updatedCart = {
+        items: updatedCartItems
+    };
+
+    this.cart = updatedCart;
+    return this.save();
+}
+
+module.exports = mongoose.model('User', userSchema);
 
 // const mongodb = require('mongodb');
 // const { getDb } = require('../util/database');
@@ -118,5 +141,3 @@ const userSchema = new Schema({
 // }
 
 // module.exports = User;
-
-module.exports = mongoose.model('User', userSchema);
