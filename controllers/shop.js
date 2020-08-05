@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const product = require('../models/product');
 
 exports.getProducts = (req, res, next) => {
     Product.find().then(products => {
@@ -36,13 +37,13 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-    req.user.getCart().then(products => {
+    req.user.populate('cart.items.productId').execPopulate().then(user => {
         res.render('shop/cart', {
             pageTitle: 'Your Cart',
             path: '/cart',
-            products: products
+            products: user.cart.items.map(product => { return {...product.productId._doc, quantity: product.quantity}})
         });
-    }).catch(err => console.log(err));
+    })
 };
 
 exports.postCart = (req, res, next) => {

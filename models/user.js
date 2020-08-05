@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
+
+const Product = require('./product');
 
 const userSchema = new Schema({
     name: {
@@ -38,7 +39,16 @@ userSchema.methods.addToCart = function (product) {
 
     this.cart = updatedCart;
     return this.save();
-}
+};
+
+// my code
+// userSchema.methods.getCart = function () {
+//     const promises = this.cart.items.map(async (product) => {
+//         const productObj = await Product.findById(product.productId);
+//         return {...productObj._doc, quantity: product.quantity}
+//     });
+//     return Promise.all(promises).then(result => result);
+// };
 
 module.exports = mongoose.model('User', userSchema);
 
