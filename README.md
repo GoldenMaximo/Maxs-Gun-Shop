@@ -1,4 +1,4 @@
-# NodeJS - The Complete Guide (incl. Deno, REST APIs, GraphQL)
+# NodeJS E-Commerce
 > Node.js Learning Project intended to upgrade my back-end skills.
 
 ## What is it?
@@ -8,19 +8,24 @@ An usage guide is soon to follow.
 
 ## Built With
 
+#### Currently in-use:
 * [Node.js](https://nodejs.org/en/) - JavaScript runtime
-* [Express.js](https://expressjs.com/) - Web framework for Node.js
-* [Pug](https://pugjs.org/api/getting-started.html) - Compiler/Templating Engine
-* [Handlebars](https://handlebarsjs.com/) - Compiler/Templating Engine
+* [Express.js](https://expressjs.com/) - Web app framework for Node.js
+* [MongoDB](https://www.mongodb.com/) - Document-oriented Database
+* [Mongoose]( https://mongoosejs.com/) - MongoDB ODM for Node.js
 * [EJS](https://ejs.co/) - Compiler/Templating Engine
-* [MySQL](https://www.mysql.com/) - Relational database management system
-* [Node MySQL 2](https://www.npmjs.com/package/mysql2) - MySQL client for Node.js
-* [Sequelize](https://sequelize.org/) - Node.js Object-Relational Mapper
 * [body-parser](https://www.npmjs.com/package/body-parser) - Node.js body parsing middleware
 * [dotenv](https://www.npmjs.com/package/dotenv) - Environment variable waiter
 * [pnpm](https://www.npmjs.com/package/pnpm) - The best package manager
 
-(Not all are in-use. Technologies were alternated mid-project for learning purposes)
+#### Used previously:
+* [Pug](https://pugjs.org/api/getting-started.html) - Compiler/Templating Engine
+* [Handlebars](https://handlebarsjs.com/) - Compiler/Templating Engine
+* [MySQL](https://www.mysql.com/) - Relational database management system
+* [Node MySQL 2](https://www.npmjs.com/package/mysql2) - MySQL client for Node.js
+* [Sequelize](https://sequelize.org/) - ORM for Node.js
+
+(Dependencies were alternated mid-project for learning purposes)
 
 ## Inspirations and resources
 
@@ -58,7 +63,6 @@ pnpm install
 3. Create an .env file with the following properties according to your local database configuration:
 
 ```
-DB_HOST=*
 DB_USER=*
 DB_NAME=*
 DB_PASS=*
@@ -85,14 +89,14 @@ or pnpm:
 pnpm start
 ```
 
-*This will start the server at `localhost:3000`*
+*This will start the server at `localhost:3000`. You can monitor the DB using [MongoDB Compass](https://www.mongodb.com/products/compass)*
 <!-- (if you didn't change the `PORT` property on `.env`) -->
 
 ## Meta
 
 Gustavo Máximo – gfmaximo97@gmail.com
 
-Many thanks to [Maximilian Schwarzmüller](https://twitter.com/maxedapps?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor) over @ [Academind](https://academind.com/) for making this possible!
+Thanks to [Maximilian Schwarzmüller](https://twitter.com/maxedapps?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor) over @ [Academind](https://academind.com/) for helping me create this project.
 
 ## Contributing
 
