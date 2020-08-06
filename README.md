@@ -29,12 +29,11 @@ An usage guide is soon to follow.
 
 ## Inspirations and resources
 
-* [NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)](https://www.udemy.com/course/nodejs-the-complete-guide/) - The course over @ Udemy
+* [NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)](https://www.udemy.com/course/nodejs-the-complete-guide/)
 
 ## DEMO
 
-<!-- ![](public/demo.gif) -->
-Soon
+![](public/demo.gif)
 
 ## Installation
 
