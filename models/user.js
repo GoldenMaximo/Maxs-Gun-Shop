@@ -47,6 +47,11 @@ userSchema.methods.removeFromCart = function (productId) {
     return this.save();
 }
 
+userSchema.methods.clearCart = function () {
+    this.cart = { items: [] };
+    return this.save();
+}
+
 // my code
 // userSchema.methods.getCart = function () {
 //     const promises = this.cart.items.map(async (product) => {
