@@ -9,6 +9,6 @@ exports.getLogin = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
-    res.cookie('loggedIn=true');
+    res.cookie('loggedIn=true; HttpOnly');
     res.redirect('/');
 };
