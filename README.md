@@ -13,6 +13,7 @@ An usage guide is soon to follow.
 * [Express.js](https://expressjs.com/) - Web app framework for Node.js
 * [MongoDB](https://www.mongodb.com/) - Document-oriented Database
 * [Mongoose]( https://mongoosejs.com/) - MongoDB ODM for Node.js
+* [connect-mongodb-session](https://www.npmjs.com/package/connect-mongodb-session) - MongoDB-backed session storage for connect and Express.
 * [EJS](https://ejs.co/) - Compiler/Templating Engine
 * [body-parser](https://www.npmjs.com/package/body-parser) - Node.js body parsing middleware
 * [dotenv](https://www.npmjs.com/package/dotenv) - Environment variable waiter
