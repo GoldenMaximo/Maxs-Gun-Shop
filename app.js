@@ -1,13 +1,22 @@
+require('dotenv').config();
+
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
-require('dotenv').config();
+const MongoDBStore = require('connect-mongodb-session')(session);
+
 
 const User = require('./models/user');
 
+const MONGODB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ygqkk.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
+
 const app = express();
+const store = new MongoDBStore({
+    uri: MONGODB_URI,
+    collection: 'sessions'
+});
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -22,7 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'whateverSecret',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store
 }));
 
 app.use((req, res, next) => {
@@ -37,7 +47,7 @@ app.use(shopRoutes);
 app.use(authRoutes);
 app.use(notFoundRoute);
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ygqkk.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`).then(connection => {
+mongoose.connect(MONGODB_URI).then(connection => {
     User.findOne().then(user => {
         if (!user) {
             const user = new User({

@@ -1,14 +1,12 @@
 exports.getLogin = (req, res, next) => {
-    // this is horrible and not scalable, jesus max wtf man
-    const isLoggedIn = req.get('Cookie').split('=')[0];
     res.render('auth/login', {
         pageTitle: 'Login',
         path: '/login',
-        isAuthenticated: isLoggedIn
+        isAuthenticated: false
     });
 };
 
 exports.postLogin = (req, res, next) => {
-    res.cookie('loggedIn=true; HttpOnly');
+    req.session.isLoggedIn = true;
     res.redirect('/');
 };
