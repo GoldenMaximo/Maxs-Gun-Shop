@@ -44,9 +44,9 @@ exports.postSignup = (req, res, next) => {
                 cart: { items: [] }
             })
             return newUser.save();
+        }).then(() => {
+            res.redirect('/login');
         })
-    }).then(result => {
-        res.redirect('/login');
     }).catch(err => console.log(err));
 };
 
