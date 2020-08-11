@@ -51,17 +51,5 @@ app.use(authRoutes);
 app.use(notFoundRoute);
 
 mongoose.connect(MONGODB_URI).then(connection => {
-    User.findOne().then(user => {
-        if (!user) {
-            const user = new User({
-                name: 'Maximo',
-                email: 'whatever@gmail.com',
-                cart: {
-                    items: []
-                }
-            });
-            user.save();
-        }
-    })
     app.listen(3000);
 }).catch(err => console.log(err));
