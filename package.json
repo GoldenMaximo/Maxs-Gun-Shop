@@ -36,8 +36,6 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "mongodb": "^3.5.9",
-    "mongoose": "^5.9.27",
-    "mysql2": "^2.1.0",
-    "sequelize": "^6.3.0"
+    "mongoose": "^5.9.27"
   }
 }
