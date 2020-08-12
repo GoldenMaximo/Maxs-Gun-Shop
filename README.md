@@ -14,6 +14,8 @@ An usage guide is soon to follow.
 * [MongoDB](https://www.mongodb.com/) - Document-oriented Database
 * [Mongoose]( https://mongoosejs.com/) - MongoDB ODM for Node.js
 * [connect-mongodb-session](https://www.npmjs.com/package/connect-mongodb-session) - MongoDB-backed session storage for connect and Express.
+* [bcrypt](https://www.npmjs.com/package/bcrypt) - Password hashing lib.
+* [csurf](https://github.com/expressjs/csurf) - Node.js CSRF protection middleware.
 * [EJS](https://ejs.co/) - Compiler/Templating Engine
 * [body-parser](https://www.npmjs.com/package/body-parser) - Node.js body parsing middleware
 * [dotenv](https://www.npmjs.com/package/dotenv) - Environment variable waiter
