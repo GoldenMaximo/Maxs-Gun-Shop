@@ -7,7 +7,6 @@ exports.getProducts = (req, res, next) => {
             prods: products,
             pageTitle: 'All Products',
             path: '/products',
-            isAuthenticated: req.session.isLoggedIn
         });
     }).catch(err =>
         console.log(err)
@@ -21,7 +20,6 @@ exports.getProduct = (req, res, next) => {
             product: product,
             pageTitle: product.title,
             path: '/products',
-            isAuthenticated: req.session.isLoggedIn
         })
     }).catch(err => console.log(err));
 }
@@ -32,7 +30,6 @@ exports.getIndex = (req, res, next) => {
             prods: products,
             pageTitle: 'Shop',
             path: '/',
-            isAuthenticated: req.session.isLoggedIn
         });
     }).catch(err => {
         console.log(err);
@@ -45,7 +42,6 @@ exports.getCart = (req, res, next) => {
             pageTitle: 'Your Cart',
             path: '/cart',
             products: user.cart.items.map(product => { return { ...product.productId._doc, quantity: product.quantity } }),
-            isAuthenticated: req.session.isLoggedIn
         });
     })
 };
@@ -74,7 +70,6 @@ exports.getOrders = (req, res, next) => {
             pageTitle: 'Your orders',
             path: '/orders',
             orders,
-            isAuthenticated: req.session.isLoggedIn
         });
     }).catch(err => console.log(err));
 };
@@ -84,7 +79,6 @@ exports.postOrder = (req, res, next) => {
         const products = user.cart.items.map(i => {
             return { quantity: i.quantity, product: { ...i.productId._doc } }
         });
-        console.log("we'll see: ", products);
         const order = new Order({
             user: {
                 email: req.user.email,
