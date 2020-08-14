@@ -1,6 +1,7 @@
 dependencies:
   bcryptjs: 2.4.3
   body-parser: 1.19.0
+  connect-flash: 0.1.1
   connect-mongodb-session: 2.4.0
   csurf: 1.11.0
   dotenv: 8.2.0
@@ -298,6 +299,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-aMKprgk5YhBNyH25hj8wGt2+D52Sw1DRRIzqBwLp2Ya9mFmY8KPvvtvmna8SxVR9JMZ4kzMD68N22vlaRpkeFA==
+  /connect-flash/0.1.1:
+    dev: false
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha1-2GMPJtlaf4UfmVax6MxnMvO2qjA=
   /connect-mongodb-session/2.4.0:
     dependencies:
       archetype: 0.11.3
@@ -1608,6 +1615,7 @@ packages:
 specifiers:
   bcryptjs: ^2.4.3
   body-parser: ^1.19.0
+  connect-flash: ^0.1.1
   connect-mongodb-session: ^2.4.0
   csurf: ^1.11.0
   dotenv: ^8.2.0
