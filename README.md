@@ -19,6 +19,7 @@ An usage guide is soon to follow.
 * [EJS](https://ejs.co/) - Compiler/Templating Engine
 * [body-parser](https://www.npmjs.com/package/body-parser) - Node.js body parsing middleware
 * [dotenv](https://www.npmjs.com/package/dotenv) - Environment variable waiter
+* [nodemailer](https://nodemailer.com/) - Email client
 * [pnpm](https://www.npmjs.com/package/pnpm) - The best package manager
 
 #### Used previously:
@@ -62,12 +63,13 @@ or the best:
 pnpm install
 ```
 
-3. Create an .env file with the following properties according to your local database configuration:
+3. Create an .env file with the following properties according to your local database and nodemailer configuration:
 
 ```
 DB_USER=*
 DB_NAME=*
 DB_PASS=*
+NODEMAILER_API_KEY=*
 ```
 
 
