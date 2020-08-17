@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const crypto = require('crypto');
+const { reset } = require('nodemon');
 
 const transporter = nodemailer.createTransport(sendgridTransport({
     auth: {
@@ -104,7 +105,7 @@ exports.postReset = (req, res, next) => {
             return res.redirect('/reset');
         }
         const token = buffer.toString('hex');
-        User.findOne({email: req.body.email}).then(user => {
+        User.findOne({ email: req.body.email }).then(user => {
             if (!user) {
                 req.flash('error', 'No account with that email was found');
                 return res.redirect('/reset');
@@ -125,4 +126,33 @@ exports.postReset = (req, res, next) => {
             });
         }).catch(err => console.log(err));
     })
+}
+
+exports.getNewPassword = (req, res, next) => {
+    const token = req.params.token;
+    User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } }).then(user => {
+        res.render('auth/new-password', {
+            pageTitle: 'New password',
+            path: '/new-password',
+            errorMessage: req.flash('error')[0],
+            userId: user._id.toString(),
+            passwordToken: token
+        });
+    }).catch(err => console.log(err));
+}
+
+exports.postNewPassword = (req, res, next) => {
+    const { password, userId, passwordToken } = req.body;
+    let resetUser;
+    User.findOne({ resetToken: passwordToken, resetTokenExpiration: { $gt: Date.now() }, _id: userId }).then(user => {
+        resetUser = user;
+        return bcrypt.hash(password, 12);
+    }).then(hashedPassword => {
+        resetUser.password = hashedPassword;
+        resetUser.resetToken = undefined;
+        resetUser.resetTokenExpiration = undefined;
+        return resetUser.save();
+    }).then(result => {
+        return res.redirect('/login');
+    }).catch(err => console.log(err));
 }
