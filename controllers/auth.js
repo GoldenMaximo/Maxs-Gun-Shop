@@ -4,6 +4,7 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
+const crypto = require('crypto');
 
 const transporter = nodemailer.createTransport(sendgridTransport({
     auth: {
@@ -71,7 +72,6 @@ exports.postSignup = (req, res, next) => {
             return newUser.save();
         }).then(() => {
             res.redirect('/login');
-            console.log('here boy: 1');
             return transporter.sendMail({
                 to: email,
                 from: 'gfmaximo97@gmail.com', // GoldenMaximo's business email
@@ -88,3 +88,41 @@ exports.postLogout = (req, res, next) => {
         res.redirect('/');
     })
 };
+
+exports.getReset = (req, res, next) => {
+    res.render('auth/reset', {
+        pageTitle: 'Reset Password',
+        path: '/reset',
+        errorMessage: req.flash('error')[0]
+    });
+}
+
+exports.postReset = (req, res, next) => {
+    crypto.randomBytes(32, (err, buffer) => {
+        if (err) {
+            console.log(err);
+            return res.redirect('/reset');
+        }
+        const token = buffer.toString('hex');
+        User.findOne({email: req.body.email}).then(user => {
+            if (!user) {
+                req.flash('error', 'No account with that email was found');
+                return res.redirect('/reset');
+            }
+            user.resetToken = token;
+            user.resetTokenExpiration = Date.now() + 3600000
+            return user.save();
+        }).then(result => {
+            res.redirect('/');
+            return transporter.sendMail({
+                to: req.body.email,
+                from: 'gfmaximo97@gmail.com', // GoldenMaximo's business email
+                subject: 'Password reset',
+                html: `
+                    <p>You requested a password reset</p>
+                    <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password</p>
+                `
+            });
+        }).catch(err => console.log(err));
+    })
+}
