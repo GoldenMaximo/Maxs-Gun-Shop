@@ -26,7 +26,12 @@ exports.getSignup = (req, res, next) => {
     res.render('auth/signup', {
         path: '/signup',
         pageTitle: 'Signup',
-        errorMessage: req.flash('error')[0]
+        errorMessage: req.flash('error')[0],
+        oldInput: {
+            email: '',
+            password: '',
+            confirmPassword: ''
+        }
     });
 };
 
@@ -71,6 +76,11 @@ exports.postSignup = (req, res, next) => {
             path: '/signup',
             pageTitle: 'Signup',
             errorMessage: errors.array()[0].msg,
+            oldInput: {
+                email,
+                password,
+                confirmPassword
+            }
         });
     }
     bcrypt.hash(password, 12).then(hashedPassword => {
