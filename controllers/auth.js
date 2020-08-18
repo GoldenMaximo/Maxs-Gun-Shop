@@ -67,29 +67,21 @@ exports.postSignup = (req, res, next) => {
             errorMessage: errors.array()[0].msg,
         });
     }
-    User.findOne({
-        email
-    }).then(user => {
-        if (user) {
-            req.flash('error', 'Email already in use.');
-            return res.redirect('/signup');
-        }
-        return bcrypt.hash(password, 12).then(hashedPassword => {
-            const newUser = new User({
-                email,
-                password: hashedPassword,
-                cart: { items: [] }
-            })
-            return newUser.save();
-        }).then(() => {
-            res.redirect('/login');
-            return transporter.sendMail({
-                to: email,
-                from: 'gfmaximo97@gmail.com', // GoldenMaximo's business email
-                subject: 'Signup successful',
-                html: '<h1>You successefully signed up!</h1>'
-            });
-        }).catch(err => console.log(err));
+    bcrypt.hash(password, 12).then(hashedPassword => {
+        const newUser = new User({
+            email,
+            password: hashedPassword,
+            cart: { items: [] }
+        })
+        return newUser.save();
+    }).then(() => {
+        res.redirect('/login');
+        return transporter.sendMail({
+            to: email,
+            from: 'gfmaximo97@gmail.com', // GoldenMaximo's business email
+            subject: 'Signup successful',
+            html: '<h1>You successefully signed up!</h1>'
+        });
     }).catch(err => console.log(err));
 };
 
