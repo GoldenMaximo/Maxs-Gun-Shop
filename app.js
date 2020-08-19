@@ -44,25 +44,29 @@ app.use(csrfProtection);
 app.use(flash());
 
 app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.csrfToken = req.csrfToken();
+    next();
+})
+
+app.use((req, res, next) => {
+    // On synchronous code expess detects errors and fowards them to the error handling middleware
+    // throw new Error('dummy error');
     if (!req.session.user) {
         return next();
     }
     User.findById(req.session.user._id).then(user => {
+        // On asynchronous code you have to catch the error and call next for it to be forwarded to the error handling middleware
+        // throw new Error('dummy error');
         if (!user) {
             return next();
         }
         req.user = user;
         next();
     }).catch(err => {
-        throw new Error(err);
+        next(new Error(err));
     });
 });
-
-app.use((req, res, next) => {
-    res.locals.isAuthenticated = req.session.isLoggedIn;
-    res.locals.csrfToken = req.csrfToken();
-    next();
-})
 
 // Routes
 app.use('/admin', adminRoutes);
@@ -71,7 +75,11 @@ app.use(authRoutes);
 app.use(errorRoutes);
 
 app.use((error, req, res, next) => {
-    res.redirect('/500');
+    res.status(500).render('500', {
+        pageTitle: 'Error occured',
+        path: '/500',
+        isAuthenticated: req.session.isLoggedIn
+    });
 })
 
 mongoose.connect(MONGODB_URI).then(connection => {
