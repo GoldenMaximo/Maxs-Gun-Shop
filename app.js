@@ -28,7 +28,7 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
-const notFoundRoute = require('./routes/not-found');
+const errorRoutes = require('./routes/errors');
 
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -48,9 +48,14 @@ app.use((req, res, next) => {
         return next();
     }
     User.findById(req.session.user._id).then(user => {
+        if (!user) {
+            return next();
+        }
         req.user = user;
         next();
-    }).catch(err => console.log(err));
+    }).catch(err => {
+        throw new Error(err);
+    });
 });
 
 app.use((req, res, next) => {
@@ -63,7 +68,11 @@ app.use((req, res, next) => {
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
-app.use(notFoundRoute);
+app.use(errorRoutes);
+
+app.use((error, req, res, next) => {
+    res.redirect('/500');
+})
 
 mongoose.connect(MONGODB_URI).then(connection => {
     app.listen(3000);
