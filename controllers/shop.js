@@ -67,7 +67,7 @@ exports.postCartDeleteProduct = (req, res) => {
 }
 
 exports.getOrders = (req, res, next) => {
-    Order.find({"user.userId": req.user._id}).then(orders => {
+    Order.find({ "user.userId": req.user._id }).then(orders => {
         res.render('shop/orders', {
             pageTitle: 'Your orders',
             path: '/orders',
@@ -110,14 +110,18 @@ exports.getInvoice = (req, res, next) => {
 
         const invoiceName = `invoice-${orderId}.pdf`;
         const invoicePath = path.join(`data/invoices/${invoiceName}`);
-        fs.readFile(invoicePath, (err, data) => {
-            if (err) {
-                console.log(err);
-                return next(err);
-            }
-            res.setHeader('Content-Type', 'application/pdf');
-            res.setHeader('Content-Disposition', `inline; filename=${invoiceName}`);
-            res.send(data);
-        }).catch(err => next(err));
+        // fs.readFile(invoicePath, (err, data) => {
+        //     if (err) {
+        //         console.log(err);
+        //         return next(err);
+        //     }
+        //     res.setHeader('Content-Type', 'application/pdf');
+        //     res.setHeader('Content-Disposition', `inline; filename=${invoiceName}`);
+        //     res.send(data);
+        // }).catch(err => next(err));
+        const file = fs.createReadStream(invoicePath);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', `inline; filename=${invoiceName}`);
+        file.pipe(res);
     });
 };
