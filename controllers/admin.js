@@ -14,7 +14,8 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-    const { title, price, description, imageUrl } = req.body;
+    const { title, price, description, image } = req.body;
+    console.log('here: ', req.file);
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -26,7 +27,7 @@ exports.postAddProduct = (req, res, next) => {
             product: {
                 title,
                 price,
-                imageUrl,
+                image,
                 description
             },
             errorMessage: errors.array()[0].msg,
@@ -34,7 +35,7 @@ exports.postAddProduct = (req, res, next) => {
         })
     }
 
-    new Product({ title, price, description, imageUrl, userId: req.user }).save().then(() => {
+    new Product({ title, price, description, image, userId: req.user }).save().then(() => {
         console.log('Created Product');
         res.redirect('/admin/products');
     }).catch(err => {
