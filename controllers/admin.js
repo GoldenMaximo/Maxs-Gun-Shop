@@ -1,6 +1,7 @@
 const Product = require('../models/product');
 const { validationResult } = require('express-validator/check');
 const mongoose = require('mongoose');
+const fileHelper = require('../util/file');
 
 exports.getAddProduct = (req, res, next) => {
     res.render('admin/edit-product', {
@@ -103,6 +104,7 @@ exports.postEditProduct = (req, res, next) => {
         product.price = price;
         product.description = description;
         if (image) {
+            fileHelper.deleteFile(product.imageUrl);
             product.imageUrl = image.path;
         }
         return product.save().then(() => {
@@ -118,7 +120,11 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res) => {
     const { productId } = req.params;
-    Product.deleteOne({ _id: productId, userId: req.user._id }).then(() => {
+    Product.findById(productId).then(prod => {
+        if (!prod) return next(new Error('Product not found'));
+        fileHelper.deleteFile(prod.imageUrl);
+        return Product.deleteOne({ _id: productId, userId: req.user._id })
+    }).then(() => {
         console.log('DELETED PRODUCT');
         res.redirect('/admin/products');
     }).catch(err => {
@@ -132,7 +138,6 @@ exports.getProducts = (req, res, next) => {
     Product.find({ userId: req.user._id })
         // .populate('userId')
         .then(products => {
-            console.log(products);
             res.render('admin/products', {
                 path: '/admin/products',
                 pageTitle: 'Admin Products',
