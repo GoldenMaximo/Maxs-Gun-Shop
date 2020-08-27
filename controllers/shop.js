@@ -103,6 +103,24 @@ exports.getOrders = (req, res, next) => {
     }).catch(err => console.log(err));
 };
 
+exports.getCheckout = (req, res, next) => {
+    req.user.populate('cart.items.productId').execPopulate().then(user => {
+        const products = user.cart.items;
+        let totalSum = 0;
+        products.forEach(e => totalSum += e.quantity * e.productId.price);
+        res.render('shop/checkout', {
+            pageTitle: 'Checkout',
+            path: '/checkout',
+            products,
+            totalSum
+        });
+    }).catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(err);
+    });
+}
+
 exports.postOrder = (req, res, next) => {
     req.user.populate('cart.items.productId').execPopulate().then(user => {
         const products = user.cart.items.map(i => {
