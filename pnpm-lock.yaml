@@ -15,6 +15,7 @@ dependencies:
   nodemailer: 6.4.11
   nodemailer-sendgrid-transport: 0.2.0
   pdfkit: 0.11.0
+  stripe: 8.89.0
   uuid: 8.3.0
 devDependencies:
   nodemon: 2.0.4
@@ -42,6 +43,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-kVrqXhbclHNHGu9ztnAwSncIgJv/FaxmzXJvGXNdcCpV1b8u1/Mi6z6m0vwy0LzKeXFTPLH0NzwmoJ3fNCIq0g==
+  /@types/node/14.6.1:
+    dev: false
+    resolution:
+      integrity: sha512-HnYlg/BRF8uC1FyKRFZwRaCPTPYKa+6I8QiUZFLredaGOou481cgFS4wKRFyKvQtX8xudqkSdBczJHIYSQYKrQ==
   /abab/1.0.4:
     dev: false
     optional: true
@@ -2399,6 +2404,12 @@ packages:
       node: '>=0.6'
     resolution:
       integrity: sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
+  /qs/6.9.4:
+    dev: false
+    engines:
+      node: '>=0.6'
+    resolution:
+      integrity: sha512-A1kFqHekCTM7cz0udomYUoYNWjBebHm/5wzU/XqrBRBNWectVH0QIiN+NEcZ0Dte5hvzHwbr8+XQmguPhJ6WdQ==
   /quote-stream/1.0.2:
     dependencies:
       buffer-equal: 0.0.1
@@ -2890,6 +2901,15 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-PFMZQukIwml8DsNEhYwobHygpgo=
+  /stripe/8.89.0:
+    dependencies:
+      '@types/node': 14.6.1
+      qs: 6.9.4
+    dev: false
+    engines:
+      node: ^8.1 || >=10.*
+    resolution:
+      integrity: sha512-XiAuNAyv2ORCWZrIaG22frr7rXP1J5+XsHA4QUBwB0fePB5kxV0O6FFMrZ8nipYZ43pnez5EIJ/Oxb1jLq6w6g==
   /supports-color/2.0.0:
     dev: false
     engines:
@@ -3267,4 +3287,5 @@ specifiers:
   nodemailer-sendgrid-transport: ^0.2.0
   nodemon: ^2.0.4
   pdfkit: ^0.11.0
+  stripe: ^8.89.0
   uuid: ^8.3.0

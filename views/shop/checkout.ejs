@@ -1,20 +1,61 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/cart.css">
-    </head>
+<link rel="stylesheet" href="/css/cart.css">
+<script src="https://js.stripe.com/v3/"></script>
+</head>
 
-    <body>
-        <%- include('../includes/navigation.ejs') %>
-        <main>
-            <ul class="cart__item-list">
-                <% products.forEach(p => { %>
-                    <li class="cart__item">
-                        <h1><%= p.productId.title %></h1>
-                        <h2>Quantity: <%= p.quantity %></h2>
-                    </li>
-                <% }) %>
-            </ul>
-            <div class="centered">
-                <h2>Total: <%= totalSum %></h2>
-            </div>
-        </main>
-        <%- include('../includes/end.ejs') %>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+        <ul class="cart__item-list">
+            <% products.forEach(p => { %>
+            <li class="cart__item">
+                <h1><%= p.productId.title %></h1>
+                <h2>Quantity: <%= p.quantity %></h2>
+            </li>
+            <% }) %>
+        </ul>
+        <div class="centered">
+            <h2>Total: <%= totalSum %></h2>
+        </div>
+        <div class="centered">
+            <button id="checkout-button">Checkout</button>
+            <input type="hidden" name="csrfToken" value="<%= csrfToken %>">
+        </div>
+        <script type="text/javascript">
+            // Create an instance of the Stripe object with your publishable API key
+            var stripe = Stripe('pk_test_51HKryqHoSmKXOdjrC67eM7IUB0N1MISmxGGbD2fAaBG9uYSxXYySxJPxuCGFnmMt058SNsaMlohGrQRiLlumNCKG00fbUWZV4A');
+            var checkoutButton = document.getElementById('checkout-button');
+            const csrf = document.querySelector('[name=csrfToken]').value;
+
+            checkoutButton.addEventListener('click', function () {
+                return stripe.redirectToCheckout({ sessionId: '<%= sessionId %>' });
+
+                // Create a new Checkout Session using the server-side endpoint you
+                // created in step 3.
+                // fetch('/create-checkout-session', {
+                //     method: 'POST',
+                //     headers: {
+                //         'csrf-token': csrf
+                //     }
+                // })
+                //     .then(function (response) {
+                //         return response.json();
+                //     })
+                //     .then(function (session) {
+                //         return stripe.redirectToCheckout({ sessionId: session.id });
+                //     })
+                //     .then(function (result) {
+                //         // If `redirectToCheckout` fails due to a browser or network
+                //         // error, you should display the localized error message to your
+                //         // customer using `error.message`.
+                //         if (result.error) {
+                //             alert(result.error.message);
+                //         }
+                //     })
+                //     .catch(function (error) {
+                //         console.error('Error:', error);
+                //     });
+            });
+        </script>
+    </main>
+    <%- include('../includes/end.ejs') %>

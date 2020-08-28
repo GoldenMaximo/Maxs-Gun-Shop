@@ -1,8 +1,10 @@
+require("dotenv").config(".env");
 const Product = require('../models/product');
 const Order = require('../models/order');
 const fs = require('fs');
 const path = require('path');
 const PDFDocument = require('pdfkit');
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const ITEMS_PER_PAGE = 1;
 
@@ -104,17 +106,45 @@ exports.getOrders = (req, res, next) => {
 };
 
 exports.getCheckout = (req, res, next) => {
+    let products;
+    let totalSum = 0;
     req.user.populate('cart.items.productId').execPopulate().then(user => {
-        const products = user.cart.items;
-        let totalSum = 0;
+        products = user.cart.items;
         products.forEach(e => totalSum += e.quantity * e.productId.price);
+
+        return stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: products.map(e => {
+                return {
+                    name: e.productId.title,
+                    description: e.productId.description,
+                    amount: e.productId.price * 100,
+                    currency: 'usd',
+                    quantity: e.quantity
+                    // price_data: {
+                    //     currency: "usd",
+                    //     product_data: {
+                    //         name: e.productId.title,
+                    //         description: e.productId.description,
+                    //     },
+                    //     unit_amount: e.productId.price * 100,
+                    // },
+                    // quantity: e.quantity,
+                }
+            }),
+            success_url: `${req.protocol}://${req.get('host')}/checkout/success`,
+            cancel_url: `${req.protocol}://${req.get('host')}/checkout/cancel`,
+        });
+    }).then(session => {
         res.render('shop/checkout', {
             pageTitle: 'Checkout',
             path: '/checkout',
             products,
-            totalSum
+            totalSum,
+            sessionId: session.id
         });
     }).catch(err => {
+        console.log('here boy: ', err);
         const error = new Error(err);
         error.httpStatusCode = 500;
         return next(err);
@@ -122,6 +152,28 @@ exports.getCheckout = (req, res, next) => {
 }
 
 exports.postOrder = (req, res, next) => {
+    req.user.populate('cart.items.productId').execPopulate().then(user => {
+        const products = user.cart.items.map(i => {
+            return { quantity: i.quantity, product: { ...i.productId._doc } }
+        });
+        const order = new Order({
+            user: {
+                email: req.user.email,
+                userId: req.user
+            },
+            products
+        });
+        order.save();
+    }).then(() => {
+        console.log('Created order');
+        return req.user.clearCart();
+    }).then(() => {
+        console.log('Cleared cart');
+        res.redirect('/orders');
+    }).catch(err => console.log(err));
+};
+
+exports.getCheckoutSuccess = (req, res, next) => {
     req.user.populate('cart.items.productId').execPopulate().then(user => {
         const products = user.cart.items.map(i => {
             return { quantity: i.quantity, product: { ...i.productId._doc } }
@@ -192,3 +244,29 @@ exports.getInvoice = (req, res, next) => {
         // file.pipe(res);
     });
 };
+
+// exports.postCreateCheckout = async (req, res) => {
+//     // Set your secret key. Remember to switch to your live secret key in production.
+//     // See your keys here: https://dashboard.stripe.com/account/apikeys
+
+//     const session = await stripe.checkout.sessions.create({
+//         payment_method_types: ["card"],
+//         line_items: [
+//             {
+//                 price_data: {
+//                     currency: "usd",
+//                     product_data: {
+//                         name: "T-shirt",
+//                     },
+//                     unit_amount: 2000,
+//                 },
+//                 quantity: 1,
+//             },
+//         ],
+//         mode: "payment",
+//         success_url: "https://example.com/success",
+//         cancel_url: "https://example.com/cancel",
+//     });
+
+//     res.json({ id: session.id });
+// }

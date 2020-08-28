@@ -95,6 +95,7 @@ app.use(authRoutes);
 app.use(errorRoutes);
 
 app.use((error, req, res, next) => {
+    console.log('ERROR: ', error);
     res.status(500).render('500', {
         pageTitle: 'Error occured',
         path: '/500',
