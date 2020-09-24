@@ -1,10 +1,11 @@
-# NodeJS E-Commerce
+<p align="center">
+    <img src="public/favicon/icon.png">
+</p>
+
+## Max's Gun Shop - What is it?
 > Node.js Learning Project intended to upgrade my back-end skills.
 
-## What is it?
-
-This is an e-commerce / online shop. Functionalities are currently under construction.
-An usage guide is soon to follow.
+This is a functional dummy e-commerce to buy and sell firearms.
 
 ## Built With
 
@@ -18,9 +19,10 @@ An usage guide is soon to follow.
 * [csurf](https://github.com/expressjs/csurf) - Node.js CSRF protection middleware.
 * [EJS](https://ejs.co/) - Compiler/Templating Engine
 * [body-parser](https://www.npmjs.com/package/body-parser) - Node.js body parsing middleware
-* [dotenv](https://www.npmjs.com/package/dotenv) - Environment variable waiter
 * [nodemailer](https://nodemailer.com/) - Email client
-* [pnpm](https://www.npmjs.com/package/pnpm) - The best package manager
+* [pdfkit](https://pdfkit.org/) - PDF generator for invoices
+* [stripe](https://stripe.com/) - Online payment processing
+* [dotenv](https://www.npmjs.com/package/dotenv) - Environment variable waiter
 
 #### Used previously:
 * [Pug](https://pugjs.org/api/getting-started.html) - Compiler/Templating Engine
@@ -35,9 +37,24 @@ An usage guide is soon to follow.
 
 * [NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)](https://www.udemy.com/course/nodejs-the-complete-guide/)
 
+I combined my creative freedom with the knowledge gained in the course above to make this application.
+
 ## DEMO
 
-![](public/demo.gif)
+### Signup and login
+
+![](public/demo/signup_and_login.gif)
+
+### Shopping (with checkout)
+
+![](public/demo/shopping.gif)
+
+### Adding products
+
+![](public/demo/adding_product.gif)
+
+***Every operation shown has built-in validation with user feedback on the front-end.*
+
 
 ## Installation
 
@@ -101,6 +118,8 @@ pnpm start
 Gustavo Máximo – gfmaximo97@gmail.com
 
 Thanks to [Maximilian Schwarzmüller](https://twitter.com/maxedapps?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor) over @ [Academind](https://academind.com/) for helping me create this project.
+
+Logo made with Gimp. The silhouette is a CZ Shadow 2.
 
 ## Contributing
 
