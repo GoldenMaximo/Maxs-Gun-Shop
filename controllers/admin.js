@@ -15,7 +15,7 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-    const { title, price, description } = req.body;
+    const { title, price, description, caliber, magCapacity, barrelLength, action, weight } = req.body;
     const errors = validationResult(req);
     const image = req.file;
 
@@ -28,7 +28,12 @@ exports.postAddProduct = (req, res, next) => {
             product: {
                 title,
                 price,
-                description
+                description,
+                caliber,
+                magCapacity,
+                barrelLength,
+                action,
+                weight
             },
             errorMessage: (!errors.isEmpty() ? errors.array()[0].msg : 'Please attach an image in one of the valid formats (.png, .jpg or .jpeg)'),
             validationErrors: (!errors.isEmpty() ? errors.array() : [])
@@ -37,7 +42,7 @@ exports.postAddProduct = (req, res, next) => {
 
     const imageUrl = image.path;
 
-    new Product({ title, price, description, imageUrl, userId: req.user }).save().then(() => {
+    new Product({ title, price, description, imageUrl, caliber, magCapacity, barrelLength, action, weight, userId: req.user }).save().then(() => {
         console.log('Created Product');
         res.redirect('/admin/products');
     }).catch(err => {
@@ -74,7 +79,7 @@ exports.getEditProduct = (req, res, next) => {
 };
 
 exports.postEditProduct = (req, res, next) => {
-    const { productId, title, price, description } = req.body;
+    const { productId, title, price, description, caliber, magCapacity, barrelLength, action, weight } = req.body;
     const errors = validationResult(req);
 
     const image = req.file;
@@ -89,6 +94,11 @@ exports.postEditProduct = (req, res, next) => {
                 title,
                 price,
                 description,
+                caliber,
+                magCapacity,
+                barrelLength,
+                action,
+                weight,
                 _id: productId
             },
             errorMessage: errors.array()[0].msg,
@@ -142,7 +152,7 @@ exports.getProducts = (req, res, next) => {
         .then(products => {
             res.render('admin/products', {
                 path: '/admin/products',
-                pageTitle: 'Admin Products',
+                pageTitle: 'Your listings',
                 prods: products,
             })
         }).catch(err => {

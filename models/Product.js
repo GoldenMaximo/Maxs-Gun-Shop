@@ -19,6 +19,26 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
+    caliber: {
+        type: String,
+        required: true
+    },
+    magCapacity: {
+        type: Number,
+        required: true
+    },
+    barrelLength: {
+        type: String,
+        required: true
+    },
+    action: {
+        type: String,
+        required: true
+    },
+    weight: {
+        type: String,
+        required: true
+    },
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User'
