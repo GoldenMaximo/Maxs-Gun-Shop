@@ -53,7 +53,11 @@ I combined my creative freedom with the knowledge gained in the course above to 
 
 ![](public/demo/adding_product.gif)
 
-***Every operation shown has built-in validation with user feedback on the front-end.*
+### Pagination
+
+![](public/demo/pagination.gif)
+
+***Every operation has built-in validation with user feedback on the front-end.*
 
 
 ## Installation
