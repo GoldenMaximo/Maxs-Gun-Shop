@@ -6,9 +6,14 @@
 }
 
 .product-item {
-    width: 20rem;
+    width: 22rem;
     max-width: 95%;
     margin: 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #00695c;
 }
 
 .product__title {
@@ -24,4 +29,18 @@
 
 .product__description {
     text-align: center;
+}
+
+.product__description_table {
+    width: 100%;
+    border-spacing: 0;
+    margin: 0 auto;
+    padding-top: 15px;
+    text-align: left;
+}
+
+.product__description_table tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
 }

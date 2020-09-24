@@ -6,10 +6,27 @@
         <main class="centered">
             <h1><%= product.title %></h1>
             <div class="image">
-                <img src="</%= product.imageUrl %>" alt="product image">
+                <img src="/<%= product.imageUrl %>" alt="product image">
             </div>
             <h2><%= product.price %></h2>
             <p><%= product.description %></p>
+            <table class="product__detail_table">
+                <tr>
+                    <td>Caliber: <%= product.caliber %></td>
+                </tr>
+                <tr>
+                    <td>Barrel Length: <%= product.barrelLength %></td>
+                </tr>
+                <tr>
+                    <td>Dry Weight: <%= product.weight %></td>
+                </tr>
+                <tr>
+                    <td>Magazine Capacity: <%= product.magCapacity %></td>
+                </tr>
+                <tr>
+                    <td>Action Type / System: <%= product.action %></td>
+                </tr>
+            </table>
             <% if (isAuthenticated) { %>
                 <%- include('../includes/add-to-cart.ejs', {product}) %>
             <% } %>

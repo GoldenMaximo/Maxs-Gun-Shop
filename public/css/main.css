@@ -13,6 +13,7 @@ body {
 main {
   padding: 1rem;
   margin: auto;
+  height: calc(100vh - 3.5rem);
 }
 
 form {
@@ -46,6 +47,10 @@ form {
   display: none;
   align-items: center;
   justify-content: space-between;
+}
+
+.main-header__logo {
+    height: 100%;
 }
 
 .main-header__item-list {
@@ -165,12 +170,12 @@ form {
 .grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: stretch;
 }
 
 .card {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.26);
 }
 
 .card__header,
@@ -186,11 +191,12 @@ form {
 }
 
 .card__image {
-  width: 100%;
+  width: 90%;
 }
 
 .card__image img {
   width: 100%;
+  border-radius: 8px;
 }
 
 .card__actions {
@@ -279,4 +285,9 @@ form {
 .pagination a.active {
     background-color: #00695c;
     color: white;
+}
+
+.product__detail_table {
+    margin: 0 auto;
+    padding: 2rem;
 }
