@@ -3,6 +3,13 @@
     max-width: 90%;
     margin: auto;
     display: block;
+    padding-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+    .product-form {
+        padding-bottom: 6rem;
+    }
 }
 
 .product-item {
