@@ -1,6 +1,6 @@
 require("dotenv").config(".env");
-const Product = require('../models/product');
-const Order = require('../models/order');
+const Product = require('../models/Product');
+const Order = require('../models/Order');
 const fs = require('fs');
 const path = require('path');
 const PDFDocument = require('pdfkit');

@@ -18,7 +18,7 @@ var favicon = require('serve-favicon');
 // const https = require('https');
 
 
-const User = require('./models/user');
+const User = require('./models/User');
 
 const MONGODB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ygqkk.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
 
