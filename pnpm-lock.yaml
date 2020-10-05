@@ -13,6 +13,7 @@ dependencies:
   helmet: 4.1.1
   mongodb: 3.5.9
   mongoose: 5.9.27_mongoose@5.9.27
+  morgan: 1.10.0
   multer: 1.4.2
   nodemailer: 6.4.11
   nodemailer-sendgrid-transport: 0.2.0
@@ -319,6 +320,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-mLQ4i2QO1ytvGWFWmcngKO//JXAQueZvwEKtjgQFM4jIK0kU+ytMfplL8j+n5mspOfjHwoAg+9yhb7BwAHm36g==
+  /basic-auth/2.0.1:
+    dependencies:
+      safe-buffer: 5.1.2
+    dev: false
+    engines:
+      node: '>= 0.8'
+    resolution:
+      integrity: sha512-NF+epuEdnUYVlGuhaxbbq+dvJttwLnGY+YixlXlME5KpQ5W3CnXA5cVTneY3SPbPDRkcjMbifrwmFYcClgOZeg==
   /bcrypt-pbkdf/1.0.2:
     dependencies:
       tweetnacl: 0.14.5
@@ -2117,6 +2126,18 @@ packages:
       mongoose: '*'
     resolution:
       integrity: sha512-N8zj4pj9J2xJ2BnQ4NiIHEtmjPldtbmbEZOMz4phLTQr3KFWPR0T0I6EzQxNioHwmDbHD4VFzbEd755oD2SJxA==
+  /morgan/1.10.0:
+    dependencies:
+      basic-auth: 2.0.1
+      debug: 2.6.9
+      depd: 2.0.0
+      on-finished: 2.3.0
+      on-headers: 1.0.2
+    dev: false
+    engines:
+      node: '>= 0.8.0'
+    resolution:
+      integrity: sha512-AbegBVI4sh6El+1gNwvD5YIck7nSA36weD7xvIxG4in80j/UoK8AEGaWnnz8v1GxonMCltmlNs5ZKbGvl9b1XQ==
   /mpath/0.5.1:
     dev: false
     engines:
@@ -3326,6 +3347,7 @@ specifiers:
   helmet: ^4.1.1
   mongodb: ^3.5.9
   mongoose: ^5.9.27
+  morgan: ^1.10.0
   multer: ^1.4.2
   nodemailer: ^6.4.11
   nodemailer-sendgrid-transport: ^0.2.0

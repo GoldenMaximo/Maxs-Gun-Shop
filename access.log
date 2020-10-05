@@ -1,0 +1,8 @@
+::1 - - [05/Oct/2020:01:33:50 +0000] "GET /?page=1 HTTP/1.1" 200 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
+::1 - - [05/Oct/2020:01:33:50 +0000] "GET /css/main.css HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
+::1 - - [05/Oct/2020:01:33:50 +0000] "GET /css/product.css HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
+::1 - - [05/Oct/2020:01:33:50 +0000] "GET /js/main.js HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
+::1 - - [05/Oct/2020:01:33:50 +0000] "GET /favicon/icon.png HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
+::1 - - [05/Oct/2020:01:33:50 +0000] "GET /images/03efbf3c-f5ea-4440-a8ff-8f991b52e268-glock_17_gen4_pistol_5344161.jpg HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
+::1 - - [05/Oct/2020:01:33:50 +0000] "GET /images/4e988d82-b401-4d41-b1ee-17c57a023b71-CZ-SHADOW-2-CINZA-URBAN-1.jpg HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
+::1 - - [05/Oct/2020:01:33:50 +0000] "GET /images/71dffd81-6f84-4cb7-bf8b-b699e92232cb-PC9108LAV-1024x770.png HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
