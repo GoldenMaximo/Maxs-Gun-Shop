@@ -1,6 +1,6 @@
 const Product = require('../models/product');
 const { validationResult } = require('express-validator/check');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const fileHelper = require('../util/file');
 
 exports.getAddProduct = (req, res, next) => {

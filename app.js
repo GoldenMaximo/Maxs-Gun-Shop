@@ -14,6 +14,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
 const fs = require('fs');
+var favicon = require('serve-favicon');
 // const https = require('https');
 
 
@@ -61,6 +62,7 @@ const errorRoutes = require('./routes/errors');
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
 
 // Middlewares
+app.use(favicon(__dirname + '/public/favicon/favicon.ico'));
 app.use(morgan('combined', { stream: accessLogStream }));
 app.use(helmet());
 app.use(compression());
