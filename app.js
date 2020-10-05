@@ -10,6 +10,8 @@ const csurf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
+const helmet = require('helmet');
+const compression = require('compression');
 
 
 const User = require('./models/user');
@@ -49,6 +51,9 @@ const authRoutes = require('./routes/auth');
 const errorRoutes = require('./routes/errors');
 
 // Middlewares
+app.use(helmet());
+app.use(compression());
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -104,5 +109,5 @@ app.use((error, req, res, next) => {
 })
 
 mongoose.connect(MONGODB_URI).then(connection => {
-    app.listen(3000);
+    app.listen(process.env.PORT || 3000);
 }).catch(err => console.log(err));
