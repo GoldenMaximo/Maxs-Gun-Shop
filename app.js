@@ -14,7 +14,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
 const fs = require('fs');
-const https = require('https');
+// const https = require('https');
 
 
 const User = require('./models/user');
@@ -30,8 +30,8 @@ const store = new MongoDBStore({
 
 const csrfProtection = csurf(); //TODO: refactor later
 
-const privateKey = fs.readFileSync('server.key');
-const certificate = fs.readFileSync('server.cert');
+// const privateKey = fs.readFileSync('server.key');
+// const certificate = fs.readFileSync('server.cert');
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
